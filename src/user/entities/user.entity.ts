@@ -27,4 +27,7 @@ export class User {
 
   @Embedded({ object: true })
   meta: MetaData;
+
+  @Property()
+  dateWorkFineHere: Date;
 }

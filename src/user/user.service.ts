@@ -12,6 +12,7 @@ export class UserService {
       meta: {
         lastLoginAt: new Date(),
       },
+      dateWorkFineHere: new Date(),
     });
     this.userService.persistAndFlush(user);
     return user;
