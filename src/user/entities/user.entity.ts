@@ -1,17 +1,26 @@
 import {
+  Collection,
   Embeddable,
   Embedded,
   Entity,
+  ManyToMany,
   PrimaryKey,
   Property,
   SerializedPrimaryKey,
 } from '@mikro-orm/core';
 import { ObjectId } from '@mikro-orm/mongodb';
+import { Book } from './book.entity';
 
 @Embeddable()
 export class MetaData {
   @Property()
   lastLoginAt: Date;
+}
+
+@Embeddable()
+export class BookInfo {
+  @ManyToMany(() => Book)
+  books = new Collection<Book>(this);
 }
 
 @Entity()
@@ -30,4 +39,7 @@ export class User {
 
   @Property()
   dateWorkFineHere: Date;
+
+  @Embedded(() => BookInfo, { object: true })
+  bookInfo: BookInfo;
 }
